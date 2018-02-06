@@ -43,10 +43,17 @@ string Mall::getAddress(){
 }
 
 bool Mall::addShop(string name, int shopNumber){
+  if(shopHead == nullptr){
+    Shop* newShop = new Shop(name, shopNumber);
+    Node* newNode = new Node(newShop, nullptr);
+    shopHead = newNode;
+    return true;
+  }
+
   Node* last = shopHead;
 
   do{ // get the last node in linked list, also see if same shopNumber occurs
-    if(last->getShopNumber() == shopNumber){
+    if(last->getShop()->getShopNumber() == shopNumber){
       return false;
     }
     if(last->getNext() != nullptr){
@@ -57,7 +64,7 @@ bool Mall::addShop(string name, int shopNumber){
 
   Shop* newShop = new Shop(name, shopNumber);
   Node* newNode = new Node(newShop, nullptr);
-  last->setNext() = newNode;
+  last->setNext(newNode);
   return true;
 }
 
