@@ -2,7 +2,7 @@
 #include "product.h"
 //You are NOT allowed to include any additional library
 
-Product::Product(string name, ProductType type, float price = 0){ // NOTE: personally added 0 as default value
+Product::Product(string name, ProductType type, float price){
   this->name = name;
   this->type = type;
   this->price = price;
@@ -41,17 +41,15 @@ bool Product::setQuantity(int quantity){
   return false;
 }
 
-int Product::compare(Product* other){
+int Product::compare(Product* other){ // returns 1 if price or name is larger than other
   if(this->price > other->price){
     return 1;
   }
   else if(fabs(this->price - other->price) < 0.01f){
-    if(){
-      // TODO: compare alphabet order
-      // NOTE; consider uppercase and lowercase
+    if(this->name > other->name){
       return 1;
     }
-    else return -1;
+    else return -1; // return -1 if price and name is smaller than other
   }
   else return 0;
 }

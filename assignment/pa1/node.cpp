@@ -2,13 +2,13 @@
 #include "node.h"
 //You are NOT allowed to include any additional library
 
-Node::Node(Shop* shop, Node* next = nullptr){ // NOTE: Personally added default value
+Node::Node(Shop* shop, Node* next){
   this->shop = shop;
   this->next = next;
 }
 
 Node::~Node(){
-
+ delete shop;
 }
 
 Shop* Node::getShop(){
