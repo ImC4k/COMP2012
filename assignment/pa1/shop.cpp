@@ -13,19 +13,26 @@ Shop::Shop(Shop& another){
   shopNumber = another.shopNumber;
   productCount = another.productCount;
 
-  products = new Product*[productCount];
-  for(int i = 0; i < productCount; i++){
-    Product* copyTarget = another.products[i];
-    products[i] = new Product(copyTarget->getName(), copyTarget->getType(), copyTarget->getPrice());
-    products[i]->setQuantity(copyTarget->getQuantity());
+  if(another.products != nullptr){
+    products = new Product*[productCount];
+    for(int i = 0; i < productCount; i++){
+      Product* copyTarget = another.products[i];
+      products[i] = new Product(copyTarget->getName(), copyTarget->getType(), copyTarget->getPrice());
+      products[i]->setQuantity(copyTarget->getQuantity());
+    }
+  }
+  else{
+    products = nullptr;
   }
 }
 
 Shop::~Shop(){
  for(int i = 0; i < productCount; i++){
    delete products[i];
+   products[i] = nullptr;
  }
  delete[] products;
+ products = nullptr;
 }
 
 string Shop::getName(){
@@ -87,8 +94,17 @@ void Shop::addProduct(string name, ProductType type, float price, int quantityTo
   }
 
   // delete old products[], reassign products[] to point to new array
+  // delete[] products; BUG
+  // products = newProducts;
+
+  // newly added delete
+  for(int i = 0; i < productCount - 1; i++){
+    delete products[i];
+    products[i] = nullptr;
+  }
   delete[] products;
   products = newProducts;
+
 }
 
 bool Shop::removeProduct(string name, int quantityToRemove){
@@ -97,6 +113,7 @@ bool Shop::removeProduct(string name, int quantityToRemove){
   for(int i = 0; i < productCount; i++){
     if(products[i]->getName() == name){
       targetProduct = products[i];
+      break;
     }
   }
   // if request is negative, or if there is no such product, or if request is larger than there exists, do nothing and return false
@@ -110,6 +127,12 @@ bool Shop::removeProduct(string name, int quantityToRemove){
   }
   else{ // (quantityToRemove == quantity), remove targetProduct from dynamic array
     // create new dynamic array to store products left
+    if(productCount == 1){
+      delete products[0];
+      delete[] products;
+      products = nullptr;
+      return;
+    }
     Product** newProducts = new Product*[--productCount];
     for(int i = 0, j = 0; i < productCount; i++, j++){ // i is index for newProducts, j is index for products
       if(products[j]->getName() == targetProduct->getName()){
@@ -122,6 +145,12 @@ bool Shop::removeProduct(string name, int quantityToRemove){
     }
 
     // remove original products[], reassign products = newProducts
+
+    // newly added delete
+    for(int i = 0; i < productCount + 1; i++){
+      delete products[i];
+      products[i] = nullptr;
+    }
     delete[] products;
     products = newProducts;
 
