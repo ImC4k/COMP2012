@@ -75,15 +75,14 @@ void Shop::addProduct(string name, ProductType type, float price, int quantityTo
   newProduct->setQuantity(quantityToAdd);
 
   bool addRequired = true;
-  // BUG
   Product** newProducts = new Product*[++productCount];
+
   for(int i = 0, j = 0; i < productCount; i++, j++){ // i for index of newProducts, j for index of products
     if(j == productCount - 1){
       newProducts[i] = newProduct;
       break;
     }
-    // int compareResult = newProduct->compare(products[j]); // DEBUG
-    // cout<<compareResult; // DEBUG
+
     if(addRequired &&  newProduct->compare(products[j])== -1){
       newProducts[i++] = newProduct;
       addRequired = false;
@@ -93,11 +92,6 @@ void Shop::addProduct(string name, ProductType type, float price, int quantityTo
     newProducts[i] = copyProduct;
   }
 
-  // delete old products[], reassign products[] to point to new array
-  // delete[] products; BUG
-  // products = newProducts;
-
-  // newly added delete
   for(int i = 0; i < productCount - 1; i++){
     delete products[i];
     products[i] = nullptr;
@@ -109,6 +103,7 @@ void Shop::addProduct(string name, ProductType type, float price, int quantityTo
 
 bool Shop::removeProduct(string name, int quantityToRemove){
 
+  // targetProduct stores the required Product object
   Product* targetProduct = nullptr; // get the pointer to the required product
   for(int i = 0; i < productCount; i++){
     if(products[i]->getName() == name){
@@ -120,18 +115,20 @@ bool Shop::removeProduct(string name, int quantityToRemove){
   if(quantityToRemove < 0 || targetProduct == nullptr || targetProduct->getQuantity() < quantityToRemove){
     return false;
   }
+  // current quantity > remove quantity
   else if(targetProduct->getQuantity() > quantityToRemove){
     int previousQuantity = targetProduct->getQuantity();
     targetProduct->setQuantity(previousQuantity - quantityToRemove);
     return true;
   }
   else{ // (quantityToRemove == quantity), remove targetProduct from dynamic array
-    // create new dynamic array to store products left
+    // create new dynamic array to store products left, deallocate old products[]
+    // BUG: memory leak
     if(productCount == 1){
       delete products[0];
       delete[] products;
       products = nullptr;
-      return;
+      return true;
     }
     Product** newProducts = new Product*[--productCount];
     for(int i = 0, j = 0; i < productCount; i++, j++){ // i is index for newProducts, j is index for products
@@ -145,8 +142,6 @@ bool Shop::removeProduct(string name, int quantityToRemove){
     }
 
     // remove original products[], reassign products = newProducts
-
-    // newly added delete
     for(int i = 0; i < productCount + 1; i++){
       delete products[i];
       products[i] = nullptr;
