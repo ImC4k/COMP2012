@@ -100,6 +100,7 @@ public:
   void addClient(Person* person); // giving full detail to add is easy
   void removeClient(string name); // this function only needs the name of person, will do search
   Person* getPerson(int index); // returns person pointer by index
+  int getPersonIndex(string name); // return person pointer by searching name
 }
 
 
@@ -141,7 +142,7 @@ string Product::setSRequest(string specialRequest){this->specialRequest = specia
 
 
 
-Person::Person(string name, Product* product = nullptr){
+Person::Person(string name, Product* product){
   this->name = name;
   if(product == nullptr){
     numProduct = 0;
@@ -299,7 +300,36 @@ void Clients::addClient(Person* person){
 
   }
 } // TODO // TODO
-void Clients::removeClient(string name){} // TODO
+void Clients::removeClient(string name){
+  int targetPersonIndex = getPerson(name);
+  if(targetPersonIndex == -1){
+    return;
+  }
+  else{ // the required person exists, removal required
+    Person** newClients = new Person*[--numClients];
+    for(int i = 0; i < numClients; i++){ // create new clients[], copy every Person except the found index of person to be removed
+      if(i == targetPersonIndex){
+        continue;
+      }
+      Person* newPerson = new Person(clients[i]);
+      newClients[i] = newPerson;
+    }
+    for(int i = 0; i < numClients + 1; i++){ // delete clients[], reassign clients = newClients
+      delete clients[i];
+    }
+    delete[] clients;
+    clients = newClients;
+    return;
+  }
+}
+int Clients::getPersonIndex(string name){
+  for(int i = 0; i < numClients; i++){
+    if(clients[i]->getName() == name){
+      return i;
+    }
+  }
+  return -1;
+}
 Person* Clients::getPerson(int index){
   if (index >= numClients) return nullptr;
   else return clients[index];
@@ -307,7 +337,7 @@ Person* Clients::getPerson(int index){
 
 
 
-Product* promptProductDetail(string name = "", int quantity = -1){ // NOTE:in perfect condition only, don't temper with the rules
+Product* promptProductDetail(string name, int quantity){ // NOTE:in perfect condition only, don't temper with the rules
   if(name == ""){
     cout<<"Please enter the name of product:"<<endl;
     cin>>name;
