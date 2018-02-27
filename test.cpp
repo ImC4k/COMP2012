@@ -1,23 +1,26 @@
 #include <iostream>
-#include <string>
+// #include <string>
 
 using namespace std;
 
-class haha{
-  string asdf;
+class Base{
+  int* pa;
 public:
-    explicit haha(const char* s){
-    asdf = s;
-  }
-
-  void print(){
-    cout<<asdf<<endl;
-  }
+  Base():pa(new int){cout<<"Base constructor called"<<endl;}
+  ~Base(){delete pa; cout<<"Base destructor called"<<endl;}
 };
 
-void print(haha obj){obj.print();}
-
+class Derived : public Base{
+  int a;
+public:
+  Derived(): Base(), a(3){cout<<"Derived constructor called"<<endl;}
+  ~Derived(){cout<<"Derived destructor called"<<endl;}
+};
 int main(){
-  print(haha("haha"));
+  Derived* obj = new Derived();
+  // Base* obj = new Derived();
+  // Base* obj = new Base();
+  delete obj;
+  cout<<"done"<<endl;
   return 0;
 }

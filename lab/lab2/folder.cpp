@@ -16,32 +16,30 @@ Folder::~Folder()
 	delete[] files;
 }
 
-Folder::Folder(const Folder &folder) // BUG
+Folder::Folder(const Folder &folder)
 {
 	this->maxSize = folder.maxSize;
 	this->files = new const File*[maxSize];
-	// for(int i = 0; i < currSize; i++){
-	// 	File newFile(*folder.files[i]);
-	// 	files[i] = &newFile;
-	// }
-	for(int i = 0; i < folder.currSize; i++){
+
+	for(int i = 0; i < folder.currSize; i++){ // is this kind of shallow copy?
 		this->addFile(*folder.files[i]);
 	}
 }
 
-void Folder::addFile(const File &file) // cout<<"Insufficient space for folder"<<endl; if cannot add file
+void Folder::addFile(const File &file)
 {
 	if(maxSize == currSize){ // if folder is full
 		cout<<"Insufficient space for folder"<<endl;
 		return;
 	}
-	if(contains(file)){
+	if(contains(file)){ // if folder contains the file already
 		cout<<"File already exists in folder"<<endl;
 		return;
 	}
 
 	files[currSize] = &file;
 	currSize++;
+	cout<<"added a file"<<endl; // DEBUG
 }
 
 bool Folder::contains(const File &file) const
@@ -51,7 +49,7 @@ bool Folder::contains(const File &file) const
 			return true;
 		}
 	}
-	return false; // Dummy statement. You need to update it with your own code.
+	return false;
 }
 
 void Folder::print() const
