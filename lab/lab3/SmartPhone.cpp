@@ -1,12 +1,8 @@
 #include "SmartPhone.h"
 
-SmartPhone::SmartPhone(const string& vendor, int num): CellularPhone(vendor, num){
-  os = new OS("Android", 1);
-}
+SmartPhone::SmartPhone(const string& vendor, int num): CellularPhone(vendor, num), os(new OS("Android", 1)){}
 
-SmartPhone::SmartPhone(const string& vendor, int num, const string& os_name, int os_ver): CellularPhone(vendor, num){
-  os = new OS(os_name, os_ver);
-}
+SmartPhone::SmartPhone(const string& vendor, int num, const string& os_name, int os_ver): CellularPhone(vendor, num), os(new OS(os_name, os_ver)){}
 
 SmartPhone::~SmartPhone(){delete os;}
 

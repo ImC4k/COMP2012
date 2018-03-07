@@ -1,9 +1,6 @@
 #include "CellularPhone.h"
 
-CellularPhone::CellularPhone(const string& vendor, int num){
-  this->vendor = vendor;
-  this->num = num;
-}
+CellularPhone::CellularPhone(const string& vendor, int num): vendor(vendor), num(num){}
 
 CellularPhone::~CellularPhone(){}
 

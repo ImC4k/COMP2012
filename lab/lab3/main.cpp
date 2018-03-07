@@ -11,21 +11,23 @@ int main() {
     my_phone->turn_on();
     my_phone->call(12344321);
     my_phone->print();
+    delete my_phone; // NOTE: added by Calvin
 
     cout << endl;
 
     SmartPhone* my_smartphone = new SmartPhone("Samsung", 23456789);
     my_smartphone->print();
-    { // DEBUG
-      const OS* os = my_smartphone->get_os(); // DEBUG
-      os->print(); // DEBUG
-    } // DEBUG
+    { // NOTE: added by Calvin
+      const OS* os = my_smartphone->get_os(); // NOTE: added by Calvin
+      os->print(); // NOTE: added by Calvin
+    } // NOTE: added by Calvin
     my_smartphone->turn_on();
     my_smartphone->call(12344321);
     my_smartphone->browse_web("http://www.google.com/");
     my_smartphone->turn_off();
     my_smartphone->browse_web("http://www.yahoo.com/");
     my_smartphone->print();
+    delete my_smartphone; // NOTE: added by Calvin
 
     cout << endl;
 
@@ -38,6 +40,6 @@ int main() {
     my_iphone->upgrade_os();
     os->print();
     my_iphone->print();
-    delete my_iphone; // DEBUG
+    delete my_iphone; // NOTE: added by Calvin
     return 0;
 }

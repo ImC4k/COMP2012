@@ -98,7 +98,6 @@ void Shop::addProduct(string name, ProductType type, float price, int quantityTo
   }
   delete[] products;
   products = newProducts;
-
 }
 
 bool Shop::removeProduct(string name, int quantityToRemove){
@@ -123,7 +122,6 @@ bool Shop::removeProduct(string name, int quantityToRemove){
   }
   else{ // (quantityToRemove == quantity), remove targetProduct from dynamic array
     // create new dynamic array to store products left, deallocate old products[]
-    // BUG: memory leak
     if(productCount == 1){
       delete products[0];
       delete[] products;

@@ -13,6 +13,11 @@ Folder::Folder(unsigned int size)
 
 Folder::~Folder()
 {
+	{
+		for(int i = 0; i < currSize -1; i++){
+			delete files[i];
+		}
+	} // deep copy requires deallocation of File objs
 	delete[] files;
 }
 
@@ -21,8 +26,8 @@ Folder::Folder(const Folder &folder)
 	this->maxSize = folder.maxSize;
 	this->files = new const File*[maxSize];
 
-	for(int i = 0; i < folder.currSize; i++){ // is this kind of shallow copy?
-		this->addFile(*folder.files[i]);
+	for(int i = 0; i < folder.currSize; i++){
+		addFile(*folder.files[i]);
 	}
 }
 
@@ -37,9 +42,10 @@ void Folder::addFile(const File &file)
 		return;
 	}
 
-	files[currSize] = &file;
+	files[currSize] = new File(file); // deep copy, deallocation required
+	// files[currSize] = &file; // shallow copy
 	currSize++;
-	cout<<"added a file"<<endl; // DEBUG
+	// cout<<"added a file"<<endl; // DEBUG
 }
 
 bool Folder::contains(const File &file) const
