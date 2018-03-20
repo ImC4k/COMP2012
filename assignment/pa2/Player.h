@@ -26,7 +26,7 @@ class Player : private CardPile {
 public:
 	Player(string name, Player* previous = nullptr);
 
-	// It add number_of_cards cards from the drawPile to Player’s cards. As mentioned above,
+	// It add number_of_cards cards from the drawPile to Playerï¿½s cards. As mentioned above,
 	// in case there is not enough card in the drawPile to draw, we need to put back card from
 	// discardPile to drawPile and shuffle. If the sum of discardPile and drawPile are still not enough,
 	// this function should draw all possible cards for the player.

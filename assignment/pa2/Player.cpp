@@ -14,4 +14,3 @@ ostream& operator<<(ostream& os, const Player& h) {
 	}
 	return os;
 }
-
