@@ -11,7 +11,8 @@ T max_(T a, T b){
 class A{
   int a;
 public:
-  A(int a): a(a){cout<<"A conversion constructor"<<endl;}
+
+  A(int a = 0): a(a){cout<<"A conversion constructor"<<endl;}
   A(const A& another): a(another.a){cout<<"A copy constructor"<<endl;}
   bool operator>(A obj){if(this->a > obj.a) return 1; else return 0;}
   int get_a(){return a;}

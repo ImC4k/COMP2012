@@ -17,4 +17,3 @@ bool Card::operator ^(const Card& t) const {
 
 Card::Card(Color color, int mark) : color(color), point(mark) {
 }
-
