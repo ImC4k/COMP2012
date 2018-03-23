@@ -18,16 +18,16 @@ bool NumberCard::operator^(const Card&t) const{
 void NumberCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<'R'; break;
+      os<<'R'; break;
     case Color::blue:
-      cout<<'B'; break;
+      os<<'B'; break;
     case Color::green:
-      cout<<'G'; break;
+      os<<'G'; break;
     case Color::yellow:
-      cout<<'Y'; break;
+      os<<'Y'; break;
     default: break;
   }
-  cout<<number<<endl;
+  os<<number;
 }
 
 void NumberCard::castEffect(Player*& currentPlayer, CardPile& drawPile, CardPile& discardPile){}

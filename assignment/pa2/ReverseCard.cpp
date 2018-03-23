@@ -11,7 +11,7 @@
 ReverseCard::ReverseCard(Color color): Card(color, POINT_REVERSECARD){}
 
 bool ReverseCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t)) return true;
+  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
   if(typeid(*this) == typeid(t)) return true;
   return false;
 }
@@ -19,16 +19,16 @@ bool ReverseCard::operator^(const Card& t) const{
 void ReverseCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<'R'; break;
+      os<<'R'; break;
     case Color::blue:
-      cout<<'B'; break;
+      os<<'B'; break;
     case Color::green:
-      cout<<'G'; break;
+      os<<'G'; break;
     case Color::yellow:
-      cout<<'Y'; break;
+      os<<'Y'; break;
     default: break;
   }
-  cout<<'r'<<endl;
+  os<<'r';
 }
 
 void ReverseCard::castEffect(Player*& currentPlayer, CardPile& drawPile, CardPile& discardPile){

@@ -8,7 +8,7 @@
 #ifndef WILDCARD_H_
 #define WILDCARD_H_
 #include "Card.h"
-#include "Player.h"
+// #include "Player.h"
 
 class WildCard: public Card{
 public:
@@ -20,7 +20,6 @@ public:
   ~WildCard();
 protected:
   virtual void serialize(ostream& os) const;
-
 };
 
-#endif /* WILDCARD_H_ */
+#endif /*WILDCARD_H_*/

@@ -18,15 +18,15 @@ bool WildCard::operator^(const Card& t) const{
 void WildCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<"Rw"<<endl; break;
+      os<<"Rw"; break;
     case Color::blue:
-      cout<<"Bw"<<endl; break;
+      os<<"Bw"; break;
     case Color::green:
-      cout<<"Gw"<<endl; break;
+      os<<"Gw"; break;
     case Color::yellow:
-      cout<<"Yw"<<endl; break;
+      os<<"Yw"; break;
     case Color::meta:
-      cout<<"WC"<<endl; break;
+      os<<"WC"; break;
     default: break;
   }
 }

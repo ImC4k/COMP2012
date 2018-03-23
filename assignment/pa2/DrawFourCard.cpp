@@ -1,45 +1,45 @@
 #include "DrawFourCard.h"
+#include "Player.h"
 
 DrawFourCard::DrawFourCard(): WildCard(POINT_DRAWFOURCARD){}
 
-bool operator^(const Card& t) const{
-  return true;
-}
 
 void DrawFourCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<"4R"<<endl; break;
+      os<<"4R"; break;
     case Color::blue:
-      cout<<"4B"<<endl; break;
+      os<<"4B"; break;
     case Color::green:
-      cout<<"4G"<<endl; break;
+      os<<"4G"; break;
     case Color::yellow:
-      cout<<"4Y"<<endl; break;
+      os<<"4Y"; break;
     case Color::meta:
-      cout<<"4+"<<endl; break;
+      os<<"+4"; break;
     default: break;
   }
 }
 
 void DrawFourCard::castEffect(Player*& currentPlayer, CardPile& drawPile, CardPile& discardPile){
   Player* nextPlayer = currentPlayer->getNextPlayer();
+  WildCard::castEffect(currentPlayer, drawPile, discardPile);
   if(nextPlayer->appealDrawFour()){
-    Card* prevCard = discardPile.getTopCard();
+    const Card* prevCard = discardPile.getTopCard();
     for(int i = 0; i < currentPlayer->getSize(); i++){
-      Card* current = currentPlayer->getCard(i);
+      const Card* current = currentPlayer->getCard(i);
       if(typeid(*current) == typeid(DrawFourCard)) continue;
-      if((*current)^(*prevCard)){ // another card could be placed
-        currentPlayer->drawCard(drawPile, discardPile, 4);
+      if((*prevCard)^(*current)){ // another card could be placed
+        currentPlayer->drawCard(drawPile, discardPile, 4); // self draw four
         return;
       }
     }
-    WildCard::castEffect();
     nextPlayer->drawCard(drawPile, discardPile, 6);
+    currentPlayer = currentPlayer->getNextPlayer();
+    return;
   }
   // without appeal
-  WildCard::castEffect();
   nextPlayer->drawCard(drawPile, discardPile, 4);
+  currentPlayer = currentPlayer->getNextPlayer();
 }
 
 DrawFourCard::~DrawFourCard(){}

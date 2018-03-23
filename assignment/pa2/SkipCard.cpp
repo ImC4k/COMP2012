@@ -12,7 +12,7 @@ SkipCard::SkipCard(Color color): Card(color, POINT_SKIPCARD){}
 SkipCard::SkipCard(Color color, int point): Card(color, point){}
 
 bool SkipCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t)) return true;
+  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
   if(typeid(*this) == typeid(t)) return true;
   return false;
 }
@@ -20,21 +20,22 @@ bool SkipCard::operator^(const Card& t) const{
 void SkipCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<'R'; break;
+      os<<'R'; break;
     case Color::blue:
-      cout<<'B'; break;
+      os<<'B'; break;
     case Color::green:
-      cout<<'G'; break;
+      os<<'G'; break;
     case Color::yellow:
-      cout<<'Y'; break;
+      os<<'Y'; break;
     default: break;
   }
-  cout<<'s'<<endl;
+  os<<'s';
 }
 
 // need to skip next player
 void SkipCard::castEffect(Player*& currentPlayer, CardPile& drawPile, CardPile& discardPile){
-
+  // TODO
+  currentPlayer = currentPlayer->getNextPlayer();
 }
 
 SkipCard::~SkipCard(){}

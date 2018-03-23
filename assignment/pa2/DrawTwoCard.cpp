@@ -11,23 +11,23 @@
 DrawTwoCard::DrawTwoCard(Color color): SkipCard(color, POINT_DRAWTWOCARD){}
 
 bool DrawTwoCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t)) return true;
+  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
   return false;
 }
 
 void DrawTwoCard::serialize(ostream& os) const{
   switch(color){
     case Color::red :
-      cout<<'R'; break;
+      os<<'R'; break;
     case Color::blue:
-      cout<<'B'; break;
+      os<<'B'; break;
     case Color::green:
-      cout<<'G'; break;
+      os<<'G'; break;
     case Color::yellow:
-      cout<<'Y'; break;
+      os<<'Y'; break;
     default: break;
   }
-  cout<<'+'<<endl;
+  os<<'+';
 }
 
  // next player draws addtional two cards
