@@ -12,7 +12,7 @@ SkipCard::SkipCard(Color color): Card(color, POINT_SKIPCARD){}
 SkipCard::SkipCard(Color color, int point): Card(color, point){}
 
 bool SkipCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
+  if(this->Card::operator^(t)) return true;
   if(typeid(*this) == typeid(t)) return true;
   return false;
 }

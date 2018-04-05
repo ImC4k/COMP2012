@@ -61,8 +61,11 @@ void Player::drawCard(CardPile& drawPile, CardPile& discardPile, int number_of_c
 	discardPile += prevCard; // add back the top card to discardPile
 }
 
+
 Card* Player::playCardAfter(const Card* topCard, int index){
-	if(index >= this->getSize())
+	if(index >= this->getSize() || index < 0) // check validity of index number
+		return nullptr;
+	if(this->getSize() == 1 && typeid(*(this->getCard(0))) != typeid(NumberCard)) // cannot place card if it's the last card but not a number card
 		return nullptr;
 	if(!((*topCard)^(*(this->getCard(index)))))
 		return nullptr;

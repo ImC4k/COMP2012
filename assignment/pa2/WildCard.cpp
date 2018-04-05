@@ -12,7 +12,7 @@ WildCard::WildCard(): Card(Color::meta, POINT_WILDCARD){}
 WildCard::WildCard(int point): Card(Color::meta, point){}
 
 bool WildCard::operator^(const Card& t) const{
-  return true;
+  return this->Card::operator^(t);
 }
 
 void WildCard::serialize(ostream& os) const{

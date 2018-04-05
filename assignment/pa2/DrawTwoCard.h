@@ -17,7 +17,7 @@ public:
   ~DrawTwoCard();
 protected:
   virtual void serialize(ostream& os) const;
-  
+
 };
 
 #endif /* DRAWTWOCARD_H_ */

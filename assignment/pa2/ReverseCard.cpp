@@ -11,7 +11,7 @@
 ReverseCard::ReverseCard(Color color): Card(color, POINT_REVERSECARD){}
 
 bool ReverseCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
+  if(this->Card::operator^(t)) return true;
   if(typeid(*this) == typeid(t)) return true;
   return false;
 }

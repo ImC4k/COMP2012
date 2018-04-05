@@ -11,7 +11,8 @@
 DrawTwoCard::DrawTwoCard(Color color): SkipCard(color, POINT_DRAWTWOCARD){}
 
 bool DrawTwoCard::operator^(const Card& t) const{
-  if(this->Card::operator^(t) || typeid(t) == typeid(*this)) return true;
+  if(this->Card::operator^(t)) return true;
+  if(typeid(t) == typeid(*this)) return true;
   return false;
 }
 
