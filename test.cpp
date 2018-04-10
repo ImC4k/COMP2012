@@ -1,13 +1,16 @@
 #include <iostream>
-#include <string>
+using std::cout;
+using std::endl;
+namespace haha{
+  class vector{public: void print(){cout<<"success"<<endl;}};
+}
 
-using namespace std;
-
+using haha::vector;
+using namespace haha;
 
 int main(){
-  string a = "3.14";
-  double b = stod(a);
-  b++;
-  cout<<b<<endl;
+  vector obj;
+  obj.print();
   return 0;
+
 }

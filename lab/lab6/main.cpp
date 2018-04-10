@@ -40,6 +40,9 @@ double evaluatePostfixExpression(const string& expression, char delim=' ') {
 				case '/':
 					operands += num_a / num_b;
 					break;
+				case '%':
+					operands += num_a % num_b;
+					break;
 				default:
 					break;
 			}

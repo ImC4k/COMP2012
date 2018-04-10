@@ -41,7 +41,8 @@ void Player::drawCard(CardPile& drawPile, CardPile& discardPile, int number_of_c
 				*this += drawPile.removeTopCard();
 			}
 			else{ // move cards from discardPile to drawPile, and shuffle
-				for(int i = 0; i < discardPile.getSize(); i++){
+				int numCardToAdd = discardPile.getSize();
+				for(int i = 0; i < numCardToAdd; i++){
 					drawPile += discardPile.removeTopCard();
 				}
 				drawPile.shuffle();
@@ -49,11 +50,14 @@ void Player::drawCard(CardPile& drawPile, CardPile& discardPile, int number_of_c
 			}
 		}
 	}
-	else{ // not enough card, must draw all cards
-		for(int i = 0; i < discardPile.getSize(); i++){
+	else{ // not enough card, must draw all cards BUG
+		int numCardToRemove = discardPile.getSize();
+		for(int i = 0; i <= numCardToRemove; i++){
 			drawPile += discardPile.removeTopCard();
 		}
-		for(int i = 0; i < drawPile.getSize(); i++){
+		drawPile.shuffle();
+		int numCardToAdd = drawPile.getSize();
+		for(int i = 0; i <= numCardToAdd; i++){
 			*this += drawPile.removeTopCard();
 		}
 	}
