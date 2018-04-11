@@ -1,16 +1,20 @@
 #include <iostream>
-using std::cout;
-using std::endl;
-namespace haha{
-  class vector{public: void print(){cout<<"success"<<endl;}};
+using namespace std;
+
+void fn(const int& b){
+  cout<<"!"<<endl;
 }
 
-using haha::vector;
-using namespace haha;
+void fn(int&& b){
+  cout<<"?!"<<endl;
+}
+
+void fn(const int&& b){
+  cout<<"?"<<endl;
+}
 
 int main(){
-  vector obj;
-  obj.print();
+  fn(const_cast<const int>(3));
   return 0;
 
 }
