@@ -2,6 +2,8 @@
 
 #include "matrix.h"
 #include "utils.h"
+#include "utils.cpp"
+#include "matrix.cpp"
 
 #define EXEC_TIMES 5000000
 
@@ -29,7 +31,7 @@ void task1() {
     cout << "-- print --" << endl;
     // TODO: Please comment the line(s) which may cause runtime error. TA may ask you to explain the reason.
     cout << "mat_a = " << endl; mat_a.print();
-//    cout << "mat_b = " << endl; mat_b.print();
+   // cout << "mat_b = " << endl; mat_b.print();
     cout << "mat_c = " << endl; mat_c.print();
     cout << "mat_d = " << endl; mat_d.print();
 
