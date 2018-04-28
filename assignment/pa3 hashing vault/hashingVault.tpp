@@ -29,5 +29,5 @@ bool HashingVault<KeyType, ValueType>::remove(KeyType key){
 
 template <typename KeyType, typename ValueType>
 void HashingVault<KeyType, ValueType>::rehash(int size, Container<KeyType, ValueType>** table, int (*fun)(KeyType)){
-  
+
 }

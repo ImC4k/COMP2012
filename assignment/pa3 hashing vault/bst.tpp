@@ -59,5 +59,5 @@ const Pair<KeyType, ValueType>* BST<KeyType, ValueType>::operator[](int n) const
 
 template <typename KeyType, typename ValueType>
 void BST<KeyType, ValueType>::print(ostream& os) const{
-  
+
 }

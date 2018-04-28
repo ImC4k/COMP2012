@@ -2,17 +2,39 @@
 
 int main(){
   BST<int> obj;
-  obj.insert(10);
-  obj.insert(8);
-  obj.insert(12);
-  obj.insert(11);
-  obj.insert(13);
-  obj.insert(13);
 
+PROMPT:
+  char input;
+  cout<<"Input i, d, p, e (insert, delete, print, exit):"<<endl<<endl;
+  cin>>input;
+  switch(input){
+    case('i'): goto INSERT;
+    case('d'): goto REMOVE;
+    case('p'): goto PRINT;
+    case('e'): goto EXIT;
+  }
+
+
+INSERT:
+  cout<<"Please input value:"<<endl;
+  int num_insert;
+  cin>>num_insert;
+  obj.insert(num_insert);
+  goto PROMPT;
+
+REMOVE:
+  cout<<"Please input value to delete:"<<endl;
+  int num_remove;
+  cin>>num_remove;
+  obj.remove(num_remove);
+  goto PROMPT;
+
+PRINT:
   obj.print();
+  cout<<"\n\n";
+  goto PROMPT;
 
-  obj.remove(10);
-  cout<<"\n\n\n\n"<<endl;
-
-  obj.print();
+EXIT:
+  cout<<"BYE"<<endl;
+  return 0;
 }

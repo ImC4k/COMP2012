@@ -87,12 +87,9 @@ void BST<T>::remove(const T& data){
       this->root = nullptr;
       return;
     }
-    else if(!this->root->left.is_empty() && !this->root->right.is_empty()){ // both triangles have stuff
-      T sup_data = this->root->left.find_max();
-      this->remove(sup_data);
-      this->root->data = sup_data;
-      // this->root->data = this->root->left.find_max();
-      // this->root->left.remove(this->root->data);
+    else if(!this->root->left.is_empty() && !this->root->right.is_empty()){ // two children
+      this->root->data = this->root->left.find_max();
+      this->root->left.remove(this->root->data);
       return;
     }
     else{ // one of the sides has stuff
@@ -113,3 +110,26 @@ void BST<T>::remove(const T& data){
     }
   }
 }
+
+/* SHORT VERSION of remove()
+
+template <typename T>
+void BST<T>::remove(const T& x){
+  if(is_empty()) return;
+  if(x < root->value)
+    root->left.remove(x);
+  else if(x > root->value)
+    root->right.remove(x);
+  else if(root->left.value && root->right.value){
+    root->value = root->left.find_max();
+    right->left.remove(root->vlaue);
+  }
+  else{
+    BST_node* temp = root;
+    root = (root->left.is_empty())? root->right.root : root->left.root;
+    temp->left.root = temp->right.root = nullptr;
+    delete temp;
+  }
+}
+
+*/
