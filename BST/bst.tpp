@@ -50,6 +50,9 @@ const T& BST<T>::find_max() const{
 
 template <typename T>
 const T& BST<T>::find_min() const{
+  if(is_empty()){
+    return -1;
+  }
   if(this->root->left.is_empty()){
     return this->root->data;
   }
@@ -120,7 +123,7 @@ void BST<T>::remove(const T& x){
     root->left.remove(x);
   else if(x > root->value)
     root->right.remove(x);
-  else if(root->left.value && root->right.value){
+  else if(root->left.root && root->right.root){
     root->value = root->left.find_max();
     right->left.remove(root->vlaue);
   }

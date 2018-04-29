@@ -3,10 +3,14 @@
 //their implementations should call the print function of the class
 //hint: don't need to include any header in this file
 
-<typename KeyType, typename ValueType>
+template <typename KeyType, typename ValueType>
 ostream& operator<<(ostream& os, const Container<KeyType, ValueType>& obj){
+  obj.print(os);
+  return os;
 }
 
-<typename KeyType, typename ValueType>
+template <typename KeyType, typename ValueType>
 ostream& operator<<(ostream& os, const HashingVault<KeyType, ValueType>& obj){
+  obj.print(os);
+  return os;
 }
