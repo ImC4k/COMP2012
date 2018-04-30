@@ -1,10 +1,8 @@
 #include <iostream>
 using namespace std;
 
-void haha(int n){
-}
+class A{};
 
 int main(){
-  haha();
   return 0;
 }

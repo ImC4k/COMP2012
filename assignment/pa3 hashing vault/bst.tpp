@@ -2,7 +2,7 @@
 //you do NOT need to include any header in this file
 //just write your BST implementation here right away
 
-// copy constructor deep copy BUG
+// copy constructor deep copy
 template <typename KeyType, typename ValueType>
 BST<KeyType, ValueType>::BST(const BST<KeyType, ValueType>& another){
   if(another.isEmpty()){

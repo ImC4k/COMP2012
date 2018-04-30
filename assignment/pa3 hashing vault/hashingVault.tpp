@@ -39,7 +39,6 @@ bool HashingVault<KeyType, ValueType>::remove(KeyType key){
   return table[numSlot]->remove(key);
 }
 
-// BUG
 template <typename KeyType, typename ValueType>
 void HashingVault<KeyType, ValueType>::rehash(int size, Container<KeyType, ValueType>** table, int (*fun)(KeyType)){
   Container<KeyType, ValueType>** old_table = this->table;

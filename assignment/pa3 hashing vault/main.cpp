@@ -88,7 +88,7 @@ int main()
     cout << "[" << *sa << "]" << endl;
     cout << endl << "add result: " << boolalpha << sa->add("car","honda") << endl;
     cout << "[" << *sa << "]" << endl;
-    cout << endl << "remove result: " << boolalpha << sa->remove("food") << endl;
+    cout << endl << "remove result: " << boolalpha << sa->remove("animal") << endl;
     cout << "[" << *sa << "]" << endl;
 
     ostringstream sout2;

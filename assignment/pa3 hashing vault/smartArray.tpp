@@ -34,11 +34,6 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value){
       insert_index = i;
     }
   }
-
-  /*
-    suppose key is 0, such key exists, then return false
-    suppose key is 2, key existing: 0, 1; then insert_index = 2
-  */
   insert_index++;
 
   int copy_index = 0;
@@ -61,6 +56,14 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key){
   if(data == nullptr){
     return false;
   }
+  if(size == 1 && data[0]->key == key){
+    delete data[0];
+    data[0] = nullptr;
+    delete[] data;
+    data = nullptr;
+    size--;
+    return true;
+  }
   int remove_index = -1;
   for(int i = 0; i < size; i++){ // scan to see is there a key, -1 if false
     if(data[i]->key == key){
@@ -68,7 +71,7 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key){
       break;
     }
   }
-  if(remove_index == -1){
+  if(remove_index == -1){ // no such key
     return false;
   }
   else{
@@ -83,19 +86,20 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key){
     // }
     int copy_index = 0;
     for(int i = 0; i < size + 1; i++){
-      if(i == size){
-        break;
-      }
       if(i == remove_index){
         delete data[i]; // prevent memory leak!!!
         data[i] = nullptr;
         copy_index++;
       }
+      if(i == size){
+        break;
+      }
       data_n[i] = data[copy_index];
       copy_index++;
     }
-    delete data;
+    delete[] data;
     data = data_n;
+
   }
   return true;
 }
