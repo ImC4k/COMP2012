@@ -116,9 +116,6 @@ int main() {
 	bst_b.insert(20+1, 'Y');
 	bst_b.insert(22+1, 'Z');
 	bst_b.insert(24+1, 'Q');
-
-
-
 	/******* END YOUR IMPLEMENTATION FOR PART B1 HERE *******/
     bst_b.print();
 	cout << boolalpha << "isBalanced : " << isBalanced(bst_b) << endl;

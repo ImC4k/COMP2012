@@ -49,7 +49,7 @@ int diameter(const BST<KT, VT>& bst) {
 	int right_diameter = diameter(bst.root->right);
 	int left_to_right = treeHeight(bst.root->left) + treeHeight(bst.root->right) + 1;
 	return max(max(left_diameter, right_diameter), left_to_right);
-	/****** START YOUR IMPLEMENTATION FOR PART A2 HERE ******/
+	/****** END YOUR IMPLEMENTATION FOR PART A2 HERE ******/
 }
 
 // Decode the morse code symbol. You can use an asterisk (*) to be the
