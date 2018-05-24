@@ -8,4 +8,4 @@ BST_node<T>::BST_node(const BST_node<T>& another){
   this->right = another.right;
 }
 template <typename T>
-BST_node<T>::~BST_node();
+BST_node<T>::~BST_node(){}
